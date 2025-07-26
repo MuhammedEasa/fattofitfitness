@@ -95,9 +95,9 @@ export default function HeroSection() {
             </p>
           </div>
 
-          {/*  CTA */}
+          {/* Improved CTA Button */}
           <div
-            className={`flex flex-col sm:flex-row gap-6 justify-center items-center transition-all duration-1000 delay-900 ${
+            className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-900 ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -105,19 +105,19 @@ export default function HeroSection() {
           >
             <button
               onClick={scrollToContact}
-              className="group relative bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 sm:px-8 md:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl uppercase tracking-wide transition-all duration-500 hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:shadow-red-500/30 border border-red-400/30 backdrop-blur-sm w-full sm:w-auto text-center"
+              className="group relative bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-2.5 rounded-lg font-bold text-base uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/25 border border-red-400/20 backdrop-blur-sm"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-4">
-                START TRANSFORMATION
+              <span className="relative z-10 flex items-center gap-2">
+                Start Transformation
                 <ArrowRight
-                  className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-all duration-300"
+                  className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                   strokeWidth={2.5}
                 />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 rounded-full opacity-0 group-hover:opacity-30 transition-all duration-500 blur-xl scale-150"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
             </button>
 
-            <div className="text-sm text-gray-300 uppercase tracking-wider font-medium">
+            <div className="text-sm text-gray-400 uppercase tracking-wide font-medium">
               No commitment required
             </div>
           </div>
