@@ -29,7 +29,7 @@ export default function HeroSection() {
           playsInline
           className="w-full h-full object-cover brightness-75 contrast-125"
         >
-          <source src="/hero_section_video.mov" type="video/mp4" />
+          <source src="/hero_section_video.mp4" type="video/mp4" />
         </video>
 
         {/* Strong dark overlay for bright morning video */}
