@@ -165,7 +165,7 @@ export default function ReviewsSection() {
           }`}
         >
           {/* Scrolling Reviews */}
-          <div className="flex gap-6 animate-scroll-horizontal">
+          <div className="flex gap-6 animate-scroll-mobile sm:animate-scroll-tablet lg:animate-scroll-desktop">
             {[...reviews, ...reviews].map((review, index) => (
               <div
                 key={`${review.id}-${index}`}
@@ -244,7 +244,7 @@ export default function ReviewsSection() {
         </div>
       </div>
 
-      {/* Custom CSS for infinite scroll */}
+      {/* Custom CSS for responsive infinite scroll with consistent speed */}
       <style jsx>{`
         @keyframes scroll-horizontal {
           0% {
@@ -255,12 +255,42 @@ export default function ReviewsSection() {
           }
         }
 
-        .animate-scroll-horizontal {
-          animation: scroll-horizontal 20s linear infinite;
+        /* Mobile: Slower speed for smaller cards */
+        .animate-scroll-mobile {
+          animation: scroll-horizontal 25s linear infinite;
         }
 
-        .animate-scroll-horizontal:hover {
+        .animate-scroll-mobile:hover {
           animation-play-state: paused;
+        }
+
+        /* Tablet: Medium speed */
+        @media (min-width: 640px) {
+          .animate-scroll-tablet {
+            animation: scroll-horizontal 22s linear infinite;
+          }
+
+          .animate-scroll-tablet:hover {
+            animation-play-state: paused;
+          }
+        }
+
+        /* Desktop: Faster speed for larger cards */
+        @media (min-width: 1024px) {
+          .animate-scroll-desktop {
+            animation: scroll-horizontal 20s linear infinite;
+          }
+
+          .animate-scroll-desktop:hover {
+            animation-play-state: paused;
+          }
+        }
+
+        /* Ultra-wide screens: Even faster */
+        @media (min-width: 1536px) {
+          .animate-scroll-desktop {
+            animation: scroll-horizontal 18s linear infinite;
+          }
         }
       `}</style>
     </section>
