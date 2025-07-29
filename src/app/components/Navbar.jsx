@@ -50,12 +50,9 @@ export default function Navbar() {
                 </a>
               </div>
               <div>
-                <h1 className="text-white text-lg sm:text-xl lg:text-2xl font-bold tracking-wide">
-                  FAT TO FIT
+                <h1 className="text-white text-lg sm:text-xl lg:text-3xl font-extrabold tracking-wide">
+                  FAT TO FIT FITNESS GYM
                 </h1>
-                <p className="text-red-500 text-xs sm:text-sm font-medium tracking-widest">
-                  FITNESS GYM
-                </p>
               </div>
             </div>
 

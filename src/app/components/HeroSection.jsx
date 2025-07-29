@@ -27,7 +27,7 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover brightness-75 contrast-125"
+          className="w-full h-full object-cover brightness-110 contrast-125"
         >
           <source src="/hero_section_video.mp4" type="video/mp4" />
         </video>

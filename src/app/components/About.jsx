@@ -81,7 +81,7 @@ export default function AboutSection() {
               </div>
               <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-4 text-center">
                 <div className="text-xl sm:text-2xl font-bold text-red-400 mb-1">🚗</div>
-                <div className="text-xs sm:text-sm text-gray-400">Easy to Reach</div>
+                <div className="text-xs sm:text-sm text-gray-400">Free Parking</div>
               </div>
             </div>
 
