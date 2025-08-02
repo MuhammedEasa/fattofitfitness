@@ -13,45 +13,37 @@ export default function TeamSection() {
     {
       id: 1,
       name: "Sahlu",
-      role: "Head Trainer",
-      specialization: "Strength Training & Body Transformation",
       image: "/Sahlu.jpg",
-      certifications: ["NASM-CPT", "CSCS", "Nutrition Specialist"],
-      stats: { clients: "500+", rating: "4.9" },
-      expertise: ["Weight Loss", "Muscle Building", "Athletic Performance"],
-      languages: ["Hindi", "English","Malayalam"]
+      languages: ["Hindi", "English", "Malayalam"]
     },
     {
       id: 2,
       name: "Naseeb Palottil",
-      role: "Senior Personal Trainer",
-      specialization: "Women's Fitness & Mobility",
       image: "/Naseeb-Palottil.jpg",
-      certifications: ["ACE-CPT", "Yoga Alliance RYT-200", "TRX Certified"],
-      stats: { clients: "300+", rating: "4.8" },
-      expertise: ["Women's Training", "Mobility", "Injury Prevention"],
-      languages: ["English", "Malayalam","Arabic","Hindi"]
+      languages: ["English", "Malayalam", "Arabic", "Hindi"]
     },
     {
       id: 3,
       name: "Ganga Devi Rai",
-      role: "Kickboxing & Combat Sports Coach",
-      specialization: "Martial Arts & High-Intensity Training",
       image: "/Ganga-Devi-Rai.jpg",
-      certifications: ["Kickboxing Level 3", "Boxing Coach License", "HIIT Specialist"],
-      stats: { clients: "400+", rating: "4.9" },
-      expertise: ["Kickboxing", "Self Defense", "HIIT Training"],
       languages: ["Hindi", "English"]
     },
     {
       id: 4,
-      name: "Vipin Harimani Nair",
-      role: "Group Fitness & Aerobics Instructor",
-      specialization: "Cardio Dance & Group Motivation",
-      image: "/Vipin-Harimani-Nair.jpg",
-      certifications: ["Group Fitness Certified", "Zumba Licensed", "Aerobics Specialist"],
-      stats: { clients: "600+", rating: "4.8" },
-      expertise: ["Group Fitness", "Cardio Dance", "Team Motivation"],
+      name: "Saranya Sudheer",
+      image: "/Saranya.JPG",
+      languages: ["Hindi", "English", "Malayalam"]
+    },
+    {
+      id: 5,
+      name: "Shimak",
+      image: "/Shimak.JPG",
+      languages: ["Hindi", "English", "Malayalam"]
+    },
+    {
+      id: 6,
+      name: "Vaishnav Seethamadathil",
+      image: "/vaishnav.JPG",
       languages: ["Hindi", "English", "Malayalam"]
     }
   ];
@@ -89,101 +81,51 @@ export default function TeamSection() {
             on your transformation journey. Each member brings <span className="text-white font-semibold">years of expertise</span> and 
             an unwavering commitment to your success.
           </p>
-
-          {/* Team Stats */}
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">4</div>
-              <div className="text-sm text-gray-400">Expert Trainers</div>
-            </div>
-            <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">25+</div>
-              <div className="text-sm text-gray-400">Years Combined</div>
-            </div>
-            <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">1800+</div>
-              <div className="text-sm text-gray-400">Clients Trained</div>
-            </div>
-            <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">4.9</div>
-              <div className="text-sm text-gray-400">Average Rating</div>
-            </div>
-          </div>
         </div>
 
         {/* Team Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {teamMembers.map((member, index) => (
             <div 
               key={member.id}
               className={`group relative transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-              style={{ transitionDelay: `${1000 + index * 150}ms` }}
+              style={{ transitionDelay: `${800 + index * 150}ms` }}
             >
               
               {/* Team Member Card */}
               <div className="relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800/50 rounded-2xl overflow-hidden hover:border-red-500/30 transition-all duration-500 group-hover:transform group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-red-500/20">
                 
-                {/* Member Image */}
-                <div className="relative h-64 sm:h-72 overflow-hidden">
+                {/* Member Image  */}
+                <div className="relative h-96 overflow-hidden">
                   <img 
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   
-                  {/* Image Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-
-
-
-                  {/* Member Info Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors duration-300">
-                      {member.name}
-                    </h3>
-                    <p className="text-red-400 font-semibold mb-1">{member.role}</p>
-                    <p className="text-gray-300 text-sm">{member.specialization}</p>
-                  </div>
+                  {/* Subtle gradient only at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
 
-                {/* Member Details */}
+                {/* Member Info - Below Image */}
                 <div className="p-6">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors duration-300">
+                    {member.name}
+                  </h3>
                   
-                  {/* Bio */}
-                  <div className="mb-4">
-                    <p className="text-gray-300 text-sm leading-relaxed">
-                      {member.bio}
-                    </p>
-                  </div>
-                  
-                  {/* Quick Stats */}
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-red-400">{member.stats.clients}</div>
-                      <div className="text-xs text-gray-400">Clients</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-red-400">{member.certifications.length}</div>
-                      <div className="text-xs text-gray-400">Certs</div>
-                    </div>
-                  </div>
-
-                  {/* Expertise Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {member.expertise.slice(0, 2).map((skill, idx) => (
-                      <span 
-                        key={idx}
-                        className="bg-red-500/10 border border-red-500/20 text-red-400 px-3 py-1 rounded-full text-xs font-medium"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-
                   {/* Languages */}
-                  <div className="text-center">
-                    <div className="text-sm text-gray-400 mb-1">Languages:</div>
-                    <div className="text-sm text-gray-300">{member.languages.join(', ')}</div>
+                  <div>
+                    <div className="text-sm text-gray-400 mb-3 font-medium uppercase tracking-wider">Languages</div>
+                    <div className="flex flex-wrap gap-2">
+                      {member.languages.map((language, idx) => (
+                        <span 
+                          key={idx}
+                          className="bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30 text-red-300 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm hover:from-red-500/30 hover:to-red-600/30 transition-all duration-300"
+                        >
+                          {language}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -198,7 +140,7 @@ export default function TeamSection() {
         </div>
 
         {/* Call to Action */}
-        <div className={`text-center mt-20 transition-all duration-1000 delay-2000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`text-center mt-20 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-6 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800 rounded-full px-8 py-4">
             <div className="flex items-center gap-2">
               <Users className="w-5 h-5 text-red-400" />

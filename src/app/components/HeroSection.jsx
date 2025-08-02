@@ -27,14 +27,17 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover brightness-110 contrast-125"
+          className="w-full h-full object-cover brightness-125 contrast-110 saturate-110"
         >
           <source src="/hero_section_video.mp4" type="video/mp4" />
         </video>
 
-        {/* Strong dark overlay for bright morning video */}
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"></div>
+        {/* Lighter overlay to preserve video visibility */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        {/* Strategic gradient only where text appears */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
+        {/* Center text area with subtle darkening */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-96 bg-black/25 rounded-full blur-3xl"></div>
       </div>
 
       {/* Content */}
@@ -46,10 +49,9 @@ export default function HeroSection() {
               : "opacity-0 translate-y-12 scale-95"
           }`}
         >
-          {/* Clean Typography with smooth animations */}
           <div className="mb-12">
             <div
-              className={`text-sm uppercase tracking-[0.3em] text-red-400 font-semibold mb-6 transition-all duration-1200 delay-300 ${
+              className={`text-sm uppercase tracking-[0.3em] text-red-400 font-semibold mb-6 transition-all duration-1200 delay-300 drop-shadow-lg ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -75,7 +77,7 @@ export default function HeroSection() {
             </h1>
           </div>
 
-          {/* Clean Subtitle with stagger animation */}
+          {/* Clean Subtitle with enhanced contrast */}
           <div
             className={`space-y-3 mb-16 transition-all duration-1000 delay-700 ${
               isVisible
@@ -83,19 +85,25 @@ export default function HeroSection() {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            <p className="text-xl md:text-2xl text-gray-200 font-light max-w-3xl mx-auto leading-relaxed">
+            <p 
+              className="text-xl md:text-2xl text-gray-100 font-light max-w-3xl mx-auto leading-relaxed"
+              style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8)' }}
+            >
               Stop dreaming about a better body.
             </p>
-            <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto text-white">
+            <p 
+              className="text-xl md:text-2xl font-medium max-w-3xl mx-auto text-white"
+              style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8)' }}
+            >
               Start{" "}
-              <span className="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent font-bold">
+              <span className="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent font-bold drop-shadow-lg">
                 building it today
               </span>
               .
             </p>
           </div>
 
-          {/* Improved CTA Button */}
+          {/* Enhanced CTA Button with backdrop */}
           <div
             className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-900 ${
               isVisible
@@ -105,7 +113,7 @@ export default function HeroSection() {
           >
             <button
               onClick={scrollToContact}
-              className="group relative bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-2.5 rounded-lg font-bold text-base uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/25 border border-red-400/20 backdrop-blur-sm"
+              className="group relative bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-3 rounded-lg font-bold text-base uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-500/25 border border-red-400/20 backdrop-blur-md shadow-2xl"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Start Transformation
@@ -117,12 +125,18 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
             </button>
 
-            <div className="text-sm text-gray-400 uppercase tracking-wide font-medium">
+            <div 
+              className="text-sm text-gray-200 uppercase tracking-wide font-medium backdrop-blur-sm bg-black/20 px-4 py-2 rounded-full"
+              style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.8)' }}
+            >
               No commitment required
             </div>
           </div>
         </div>
       </div>
+
+      {/* Additional subtle vignette effect */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/20 pointer-events-none"></div>
     </section>
   );
 }
