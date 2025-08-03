@@ -5,11 +5,15 @@ import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
 export default function GallerySection() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [loadedImages, setLoadedImages] = useState(new Set());
+  const [loadingImages, setLoadingImages] = useState(new Set());
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+
 
   const galleryImages = [
     {
@@ -92,6 +96,35 @@ export default function GallerySection() {
     }
   ];
 
+  const handleImageLoad = (imageId) => {
+    setLoadedImages(prev => new Set([...prev, imageId]));
+    setLoadingImages(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(imageId);
+      return newSet;
+    });
+  };
+
+  const handleImageLoadStart = (imageId) => {
+    // Only show loading if image isn't already loaded (prevents flash for cached images)
+    if (!loadedImages.has(imageId)) {
+      setLoadingImages(prev => new Set([...prev, imageId]));
+    }
+  };
+
+  const handleImageError = (imageId) => {
+    setLoadingImages(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(imageId);
+      return newSet;
+    });
+  };
+
+  // Check if image is actually loading (not just cached)
+  const isImageLoading = (imageId) => {
+    return loadingImages.has(imageId) && !loadedImages.has(imageId);
+  };
+
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = 400;
@@ -116,6 +149,36 @@ export default function GallerySection() {
     setSelectedImage(null);
     document.body.style.overflow = 'unset';
   };
+
+  // Image Loading Skeleton Component
+  const ImageSkeleton = () => (
+    <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800/50 rounded-xl overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 animate-pulse"></div>
+      
+      {/* Loading Animation */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        {/* Spinning Loader */}
+        <div className="relative mb-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-transparent border-t-red-500 border-r-red-500"></div>
+          <div className="absolute top-1 left-1 animate-spin rounded-full h-10 w-10 border-4 border-transparent border-b-red-400 border-l-red-400" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+        </div>
+        
+        {/* Loading Text */}
+        <div className="text-center">
+          <div className="text-red-400 font-semibold text-sm mb-2">Loading Image</div>
+          <div className="flex space-x-1">
+            <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Shimmer Effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 animate-pulse"></div>
+    </div>
+  );
 
   return (
     <section id="gallery" className="relative py-20 lg:py-32 bg-gradient-to-b from-black via-gray-950 to-black overflow-hidden">
@@ -197,38 +260,53 @@ export default function GallerySection() {
                   
                   {/* Image Container */}
                   <div className="relative overflow-hidden rounded-xl shadow-2xl h-80 sm:h-96 lg:h-[28rem]">
+                    
+                    {/* Loading Skeleton - Show initially or when actively loading */}
+                    {(!loadedImages.has(image.id) || isImageLoading(image.id)) && <ImageSkeleton />}
+                    
                     <img 
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                        loadedImages.has(image.id) ? 'opacity-100' : 'opacity-0'
+                      }`}
                       loading="lazy"
+                      onLoadStart={() => handleImageLoadStart(image.id)}
+                      onLoad={() => handleImageLoad(image.id)}
+                      onError={() => handleImageError(image.id)}
                     />
                     
-                    {/* Image Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                    
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4 bg-red-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                      {image.category}
-                    </div>
+                    {/* Image Overlay - Show when loaded */}
+                    {loadedImages.has(image.id) && (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        
+                        {/* Category Badge */}
+                        <div className="absolute top-4 left-4 bg-red-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                          {image.category}
+                        </div>
 
-                    {/* Zoom Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full border border-white/30">
-                        <ZoomIn className="w-8 h-8 text-white" strokeWidth={2} />
-                      </div>
-                    </div>
+                        {/* Zoom Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full border border-white/30">
+                            <ZoomIn className="w-8 h-8 text-white" strokeWidth={2} />
+                          </div>
+                        </div>
 
-                    {/* Image Title */}
-                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                      <p className="text-white font-medium text-sm leading-tight">
-                        {image.alt}
-                      </p>
-                    </div>
+                        {/* Image Title */}
+                        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                          <p className="text-white font-medium text-sm leading-tight">
+                            {image.alt}
+                          </p>
+                        </div>
+                      </>
+                    )}
                   </div>
 
-                  {/* Glow Effect */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-transparent to-red-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                  {/* Glow Effect - Show when loaded */}
+                  {loadedImages.has(image.id) && (
+                    <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-transparent to-red-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                  )}
                 </div>
               ))}
             </div>
@@ -252,23 +330,38 @@ export default function GallerySection() {
 
             {/* Lightbox Image */}
             <div className="relative overflow-hidden rounded-xl">
+              {/* Loading state for lightbox */}
+              {!loadedImages.has(selectedImage.id) && (
+                <div className="w-full h-96 bg-gradient-to-br from-gray-900/80 to-black/80 rounded-xl flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-16 w-16 border-4 border-transparent border-t-red-500 border-r-red-500 mx-auto mb-4"></div>
+                    <div className="text-red-400 font-semibold">Loading High Quality Image...</div>
+                  </div>
+                </div>
+              )}
+              
               <img 
                 src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="w-full h-auto max-h-[80vh] object-contain"
+                className={`w-full h-auto max-h-[80vh] object-contain transition-opacity duration-500 ${
+                  loadedImages.has(selectedImage.id) ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={() => handleImageLoad(selectedImage.id)}
               />
               
-              {/* Image Info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-white font-semibold text-lg mb-1">{selectedImage.alt}</p>
-                    <span className="bg-red-500/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {selectedImage.category}
-                    </span>
+              {/* Image Info - Only show when loaded */}
+              {loadedImages.has(selectedImage.id) && (
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-white font-semibold text-lg mb-1">{selectedImage.alt}</p>
+                      <span className="bg-red-500/90 text-white px-3 py-1 rounded-full text-sm font-medium">
+                        {selectedImage.category}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

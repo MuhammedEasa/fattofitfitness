@@ -49,7 +49,7 @@ export default function LocationSection() {
   ];
 
   const TikTokIcon = () => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6">
       <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43V7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.43Z"/>
     </svg>
   );
@@ -97,9 +97,7 @@ export default function LocationSection() {
             {/* Logo Section */}
             <div className={`mb-12 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="bg-black p-8 rounded-2xl text-center shadow-2xl shadow-red-500/20 border border-gray-800">
-               
-                  <img src="/color-logo.png" alt="Fat to Fit Fitness Gym Logo" className="h-16 w-auto mx-auto" />
-            
+                <img src="/color-logo.png" alt="Fat to Fit Fitness Gym Logo" className="h-16 w-auto mx-auto" />
               </div>
             </div>
 
@@ -169,18 +167,18 @@ export default function LocationSection() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group flex flex-col items-center gap-2 p-4 bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:${social.color}`}
+                      className="group flex flex-col items-center gap-2 p-4 bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-red-500/30"
                     >
                       <div className="relative">
-                        <IconComponent className="w-6 h-6 text-white transition-colors duration-300 group-hover:text-current" strokeWidth={2} />
+                        <IconComponent className="w-6 h-6 text-white transition-all duration-300" strokeWidth={2} />
                         
                         {/* Glow effect */}
                         <div className="absolute inset-0 blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300">
-                          <IconComponent className="w-6 h-6" strokeWidth={2} />
+                          <IconComponent className="w-6 h-6 text-red-400" strokeWidth={2} />
                         </div>
                       </div>
                       
-                      <span className="text-xs font-medium text-gray-400 group-hover:text-current transition-colors duration-300">
+                      <span className="text-xs font-medium text-gray-400 group-hover:text-white transition-colors duration-300">
                         {social.name}
                       </span>
                     </a>
@@ -204,29 +202,30 @@ export default function LocationSection() {
               >
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-gray-800 group-hover:border-red-500/30 transition-all duration-500 cursor-pointer">
                   
-                  {/* Google Maps Embed */}
+                  {/* Google Maps Embed - Exact gym location from share link */}
                   <div className="aspect-[4/3] w-full">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.0123456789!2d55.2!3d25.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA2JzAwLjAiTiA1NcKwMTInMDAuMCJF!5e0!3m2!1sen!2sae!4v1234567890"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.7431022023775!2d55.20034687508842!3d25.110556135205073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6bb8932b604b%3A0x8a44c575633c3bb6!2sFat%20To%20Fit%20Fitness%20Gym%20(Biggest%20Gym%20in%20Al%20Barsha)!5e0!3m2!1sen!2sae!4v1754241084678!5m2!1sen!2sae"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
                       allowFullScreen=""
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      className="w-full h-full pointer-events-none"
+                      className="w-full h-full"
+                      title="Fat to Fit Fitness Gym - Sama Building, Al Barsha 1, Dubai"
                     ></iframe>
                   </div>
 
                   {/* Map Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
                   
                   {/* Map CTA */}
-                  <div className="absolute bottom-6 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                  <div className="absolute bottom-6 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 pointer-events-none">
                     <div className="bg-black/80 backdrop-blur-sm border border-white/20 rounded-xl p-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-white font-semibold">Al Barsha 1, Dubai</p>
+                          <p className="text-white font-semibold">Sama Building, Al Barsha 1</p>
                           <p className="text-gray-300 text-sm">Click to open in Google Maps</p>
                         </div>
                         <div className="bg-red-500 p-2 rounded-full">
@@ -250,8 +249,8 @@ export default function LocationSection() {
                 <div className="text-sm text-gray-400">From Metro</div>
               </div>
               <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-4 text-center hover:border-red-500/30 transition-all duration-300">
-                <div className="text-xl font-bold text-red-400 mb-1">Located in a Premium</div>
-                <div className="text-sm text-gray-400"> Central Area</div>
+                <div className="text-xl font-bold text-red-400 mb-1">Premium</div>
+                <div className="text-sm text-gray-400">Central Area</div>
               </div>
             </div>
 
