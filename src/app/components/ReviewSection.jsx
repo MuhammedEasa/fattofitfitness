@@ -77,7 +77,7 @@ export default function ReviewsSection() {
   ];
 
   const handleGoogleReviewClick = () => {
-    window.open("https://share.google/wS3gGPJ66FB24sIYH", "_blank");
+    window.open("https://www.google.com/search?sxsrf=AE3TifOik2syH3SCaNPZEkcpL5YTsUlwgA:1753273335630&q=fat+to+fit+fitness+gym+(biggest+gym+in+al+barsha)+reviews&uds=AOm0WdEIRgrhKMTu4oB5sus1hqYCOLN-7wsIVAdvoE1lDFRancJarcpXIBwFagDPvkXPifaWYWWOA_izmYhLCFCmkumdAFETb_TQ_t7m72KYH8dXMtojLRbPxMTShNYc0xtjjFCwcjXoY_FdWuUPSQjwUIlZOdWAJeinNhQokxyvvcKAhqmNesu_P1X6GiWin9W57yETIXK0C50gEZe4qEtYxD9_r0ZvA8986j_p30Ij5Y0SaY7Z1yb9S_U_VYVTVLYEsJBnTyL9tr4-fakkRiIgEzY3AKKdIgrRQldqFdFDj_aNLeBogUmTM4aas05B8lM-AHCdN6QmudfHfiMMLlzBgFyWJeDon5F8oIqdzw0TrqgQqifxw0eFs_Cse2SqdsotTV4sl09uKpMmPp9GC6mUPWH6ZR4WqtgbnMlC_QbH9dE6tVBa8svS6DfzCtHKGzKYMrvYoL9kbz6RaXfeK3TP66nb-nmQdcHpZYWVOJnaDuxXLSTlnxEO_V7HgXWZ92sHRNNXjtNyDNgU5faD3KzE4OCSgomx8jubop22hnP266Bemf-_GJlD_2C7pm4xbY0Vc0hG-2pTboRdnsum9qC1VloPN1ZaOHkiIlxWyBxRE6wxErzDe-xWjEoNeCtouMGDvDPhYs1t&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E7YX4INZUpDZS3VvLzS988SI-WMpgHovPGhdTujskfUNfuFdVfzpie7vcdIGjjSxXAoDiWP7vkbDB-x8AU9nb2kcjl8qZkPQJXNxEji-v55cdolK_uw0oMfeRDl6xmUobNNQ5eXTq33loN2bAS0sGiVYRvVO&stq=1&cs=1&lei=99OAaPCVJpKQxc8P5p6fiA0#ebo=2", "_blank");
   };
 
   return (
